@@ -1,0 +1,44 @@
+
+# 建立資料庫
+CREATE DATABASE `cxcxc_tutorial` COLLATE 'utf8_general_ci';
+
+＃在cxcxc_tutorial資料庫內，創建表格，索引主鍵
+use cxcxc_tutorial;
+CREATE TABLE cxcxc_tutorial.users ( name varchar(30), user_id varchar(30), age INT, PRIMARY KEY (user_id) );
+
+# 插入資料
+INSERT INTO cxcxc_tutorial.users VALUES ('binghongli', 'cxcxc-1', 32);
+INSERT INTO cxcxc_tutorial.users VALUES ('tingjui', 'cxcxc-2', 28);
+INSERT INTO cxcxc_tutorial.users VALUES ('random', 'cxcxc-3', 28);
+
+# 查詢所有資料，未來不要這樣做，找資料也講求效能
+SELECT * FROM cxcxc_tutorial.users ;
+
+# 查詢有限資料
+SELECT * FROM cxcxc_tutorial.users LIMIT 2;
+
+# 篩選資料
+SELECT * FROM cxcxc_tutorial.users WHERE `user_id` = 'cxcxc-2';
+
+# 更新資料
+UPDATE cxcxc_tutorial.users SET `name` = 'raymond'  WHERE `user_id` = 'cxcxc-3';
+SELECT * FROM cxcxc_tutorial.users WHERE `user_id` = 'cxcxc-3';
+
+# 備份資料
+# 請在linux-shell使用
+docker exec db sh -c 'exec mysqldump --all-databases -uroot -p"example"' > all-databases.sql
+
+# 刪除資料表
+DROP TABLE cxcxc_tutorial.users ;
+SELECT * FROM cxcxc_tutorial.users ;
+
+# 還原資料
+# 請在linux-shell使用
+docker exec -i db sh -c 'exec mysql -uroot -p"example"' < all-databases.sql
+
+# 查閱資料
+SELECT * FROM `cxcxc_tutorial.users` ;
+
+# 監測log
+# 請在linux-shell使用
+docker logs db
