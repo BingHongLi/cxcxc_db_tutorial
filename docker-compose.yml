@@ -1,8 +1,17 @@
-
 # Use root/example as user/password credentials 
 version: '3.1' 
 
 services:
+
+  jupyter-tutorial:
+    image: jupyter/base-notebook
+    container_name: jupyter.local
+    ports:
+      - "8888:8888"
+      - "5000:5000"
+    volumes:
+      - ./work:/home/jovyan/work/
+    command: start-notebook.sh --NotebookApp.token=''
 
   db:
     container_name: db
@@ -10,7 +19,7 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: example
+      MYSQL_ROOT_PASSWORD: cxcxc_demo
     
   db-adminer:
     container_name: db-adminer

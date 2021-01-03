@@ -2,7 +2,7 @@
 # 建立資料庫
 CREATE DATABASE `cxcxc_tutorial` COLLATE 'utf8_general_ci';
 
-＃在cxcxc_tutorial資料庫內，創建表格，索引主鍵
+＃在cxcxc-tutorial資料庫內，創建表格，索引主鍵
 use cxcxc_tutorial;
 CREATE TABLE cxcxc_tutorial.users ( name varchar(30), user_id varchar(30), age INT, PRIMARY KEY (user_id) );
 
@@ -26,7 +26,7 @@ SELECT * FROM cxcxc_tutorial.users WHERE `user_id` = 'cxcxc-3';
 
 # 備份資料
 # 請在linux-shell使用
-docker exec db sh -c 'exec mysqldump --all-databases -uroot -p"example"' > all-databases.sql
+docker exec db sh -c 'exec mysqldump --all-databases -uroot -p"cxcxc_demo"' > all-databases.sql
 
 # 刪除資料表
 DROP TABLE cxcxc_tutorial.users ;
@@ -34,7 +34,7 @@ SELECT * FROM cxcxc_tutorial.users ;
 
 # 還原資料
 # 請在linux-shell使用
-docker exec -i db sh -c 'exec mysql -uroot -p"example"' < all-databases.sql
+docker exec -i db sh -c 'exec mysql -uroot -p"cxcxc_demo"' < all-databases.sql
 
 # 查閱資料
 SELECT * FROM `cxcxc_tutorial.users` ;
