@@ -13,6 +13,22 @@ services:
       - ./work:/home/jovyan/work/
     command: start-notebook.sh --NotebookApp.token=''
 
+  cache:
+    container_name: cache.pri
+    image: redis:6.0.9
+    ports:
+      - "6379:6379"
+
+  redis-commander:
+    container_name: redis-commander
+    hostname: redis-commander
+    image: rediscommander/redis-commander:latest
+    restart: always
+    environment:
+    - REDIS_HOSTS=local:cache.pri:6379
+    ports:
+    - "8081:8081"
+
   db:
     container_name: db
     image: mysql:5.7.26
@@ -40,7 +56,7 @@ services:
     ports: 
       - 8001:8001 
     environment: 
-      - AWS_REGION=eu-west-1 
+      - AWS_REGION=ddblocal
       - AWS_ACCESS_KEY_ID=local 
       - AWS_SECRET_ACCESS_KEY=local 
       - DYNAMO_ENDPOINT=http://dynamodb:8000
