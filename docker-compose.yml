@@ -36,6 +36,8 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: cxcxc_demo
+    ports:
+    - "3306:3306"
     
   db-adminer:
     container_name: db-adminer
